@@ -7,6 +7,7 @@ const xss = require("xss-clean");
 const hpp = require("hpp");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
+const cors = require("cors");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -17,6 +18,7 @@ const reviewRouter = require("./routes/reviewRouter");
 const bookingRouter = require("./routes/bookingRouter");
 const viewRouter = require("./routes/viewRoutes");
 
+// Start express app
 const app = express();
 
 app.enable("trust-proxy");
@@ -24,11 +26,15 @@ app.enable("trust-proxy");
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
+// Access-Control-Allow-Origin
+app.use(cors());
+
+app.options("*", cors());
+
+// Serving static files
 app.use(express.static(path.join(__dirname, "public")));
-// 1) MIDDLEWARES
-// if (process.env.NODE_ENV === "development") {
-//   app.use(morgan("dev"));
-// }
+
+// Set security HTTP Headers
 app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }));
 app.use(
   helmet.contentSecurityPolicy({
