@@ -5,6 +5,7 @@ import { login, logout } from "./login";
 import { updateSettings } from "./updateSettings";
 import { bookTour } from "./stripe.js";
 import { signup } from "./signup.js";
+import { showAlert } from "./alerts";
 
 const map = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
@@ -78,3 +79,6 @@ if (bookBtn) {
     bookTour(tourId);
   });
 }
+
+const alertMessage = document.querySelector("body").dataset.alert;
+if(alert) showAlert("success", alertMessage, 15);
