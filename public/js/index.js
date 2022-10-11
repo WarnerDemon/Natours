@@ -31,10 +31,10 @@ if (loginForm) {
 if (signupForm) {
   signupForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const passwordConfirm = document.getElementById('password-confirm').value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("password-confirm").value;
     signup(name, email, password, passwordConfirm);
   });
 }
@@ -81,4 +81,4 @@ if (bookBtn) {
 }
 
 const alertMessage = document.querySelector("body").dataset.alert;
-if(alertMessage) showAlert("success", alertMessage, 15);
+if (alertMessage) showAlert("success", alertMessage, 15);
