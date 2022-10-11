@@ -4,7 +4,6 @@ const User = require("../models/userModel");
 const Booking = require("../models/bookingModel");
 const catchAsync = require("../utils/catchAsync");
 const factory = require("./handlerFactory");
-const User = require("../models/userModel");
 
 exports.getCheckoutSessuion = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.tourId);
@@ -61,7 +60,8 @@ const createBookingCheckout = async (session) => {
   const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const price = session.line_items[0].price_data.unit_amount / 100;
-  await await Booking.create({ tour, user, price });
+
+  await Booking.create({ tour, user, price });
 };
 
 exports.webHookCheckout = (req, res, next) => {
